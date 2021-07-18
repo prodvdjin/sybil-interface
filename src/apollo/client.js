@@ -12,7 +12,8 @@ export const uniswapClient = new ApolloClient({
 
 export const compoundClient = new ApolloClient({
   link: new HttpLink({
-    uri: 'https://api.thegraph.com/subgraphs/name/arr00/compound-governance-2'
+    // uri: 'https://api.thegraph.com/subgraphs/name/arr00/compound-governance-2'
+    uri: ' https://api.studio.thegraph.com/query/1451/ecr-subgraph/v0.0.1'
   }),
   cache: new InMemoryCache(),
   shouldBatch: true

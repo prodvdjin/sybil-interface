@@ -166,7 +166,8 @@ function DelegateInfo({
   const showDelegateButton = Boolean(userTokenBalance && JSBI.greaterThan(userTokenBalance.raw, BIG_INT_ZERO))
 
   // mainnet only
-  if (chainId && chainId !== ChainId.MAINNET) {
+  // TODO: change later
+  if (chainId && chainId !== 4) {
     return (
       <BodyWrapper>
         <OutlineCard>Please switch to Ethereum mainnet. </OutlineCard>

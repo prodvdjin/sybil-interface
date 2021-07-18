@@ -48,7 +48,8 @@ export default function Delegates({
             <Tabs />
           </AutoColumn>
         </MediumHeaderWrapper>
-        {chainId === ChainId.MAINNET ? (
+        {/* TODO: fix later */}
+        {chainId === 4 ? (
           <DelegateList hideZero={false} />
         ) : (
           <OutlineCard>Please switch to Ethereum mainnet. </OutlineCard>

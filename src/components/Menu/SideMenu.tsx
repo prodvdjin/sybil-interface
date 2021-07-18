@@ -68,6 +68,7 @@ export const WrappedListLogo = styled.img<{ color: string }>`
   height: 40px;
   width: 40px;
   border-radius: 50%;
+  background-color: ${({ color }) => color};
 
   :hover {
     cursor: pointer;
@@ -99,7 +100,7 @@ export default function SideMenu(): JSX.Element {
           <BlankInternalLink to="/">
             <RowFixed style={{ gap: '8px' }}>
               <SybilLogo />
-              <SybilWorkmark>sybil</SybilWorkmark>
+              <SybilWorkmark>ECR</SybilWorkmark>
             </RowFixed>
           </BlankInternalLink>
           <ExternalLink href="https://github.com/Uniswap/sybil-list">
@@ -116,7 +117,7 @@ export default function SideMenu(): JSX.Element {
               <RowBetween align="flex-start">
                 <RowFixed style={{ gap: '8px' }}>
                   <SybilLogo />
-                  <SybilWorkmark>sybil</SybilWorkmark>
+                  <SybilWorkmark>ECR</SybilWorkmark>
                 </RowFixed>
                 <ButtonBasic
                   onClick={() => closeBoth()}
@@ -161,7 +162,7 @@ export default function SideMenu(): JSX.Element {
           ))}
         </AutoColumn>
 
-        {!faqOpen ? (
+        {/* {!faqOpen ? (
           <AutoColumn gap="16px" style={{ justifySelf: 'flex-end', alignItems: 'flex-start', padding: '0 1.25rem' }}>
             <ButtonBasic
               as={ExternalLink}
@@ -206,7 +207,7 @@ export default function SideMenu(): JSX.Element {
               <X />
             </ButtonBasic>
           </RowBetween>
-        )}
+        )} */}
 
         {faqOpen && (
           <AutoColumn gap="1.5rem" style={{ padding: '0 1.25rem' }}>

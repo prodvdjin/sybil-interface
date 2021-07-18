@@ -11,7 +11,7 @@ import {
 } from './actions'
 import { createReducer } from '@reduxjs/toolkit'
 import UniLogo from '../../assets/images/uni-logo.png'
-import CompLogo from '../../assets/images/compLogo.png'
+import CompLogo from '../../assets/images/ecrLogo.png'
 import AaveLogo from '../../assets/images/aave-logo.png'
 import PoolLogo from '../../assets/images/pooltogether-icon.png'
 import RadicleLogo from '../../assets/images/radicle-logo.svg'
@@ -64,10 +64,10 @@ export const COMP_ADDRESS = '0xc00e94cb662c3520282e6f5717214004a7f26888'
 const COMP = new Token(ChainId.MAINNET, COMP_ADDRESS, 18, 'COMP', 'Compound Governance Token')
 export const COMPOUND_GOVERNANCE: GovernanceInfo = {
   id: 'compound',
-  name: 'Compound Governance',
+  name: 'ECR Governance',
   logo: CompLogo,
-  primaryColor: '#00D395',
-  secondaryColor: '#E1F9F1',
+  primaryColor: '#e7bd60',
+  secondaryColor: '#fbefd4',
   token: serializeToken(COMP),
   governanceAlphaAddresses: [COMP_GOVERNANCE_ADDRESS],
   governanceAddressBravo: COMP_GOVERNANCE_ADDRESS_BRAVO,
@@ -123,11 +123,11 @@ export const RADICLE_GOVERNANCE: GovernanceInfo = {
 
 // mapping for routing
 export const SUPPORTED_PROTOCOLS: { [id: string]: GovernanceInfo } = {
-  uniswap: UNISWAP_GOVERNANCE,
-  compound: COMPOUND_GOVERNANCE,
-  aave: AAVE_GOVERNANCE,
-  pool: POOL_TOGETHER_GOVERNANCE,
-  radicle: RADICLE_GOVERNANCE
+  // uniswap: UNISWAP_GOVERNANCE,
+  compound: COMPOUND_GOVERNANCE
+  // aave: AAVE_GOVERNANCE,
+  // pool: POOL_TOGETHER_GOVERNANCE,
+  // radicle: RADICLE_GOVERNANCE
 }
 
 export const FETCHING_INTERVAL = 50

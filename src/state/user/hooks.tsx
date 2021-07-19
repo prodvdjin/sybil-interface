@@ -1,4 +1,5 @@
-import { Pair, Token } from '@uniswap/sdk'
+import { Pair } from '@uniswap/sdk'
+import { Token } from '@uniswap/sdk-core'
 import { useCallback } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 
@@ -103,6 +104,6 @@ export function useURLWarningToggle(): () => void {
  * @param tokenA one of the two tokens
  * @param tokenB the other token
  */
-export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token]): Token {
-  return new Token(tokenA.chainId, Pair.getAddress(tokenA, tokenB), 18, 'UNI-V2', 'Uniswap V2')
-}
+// export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token]): Token {
+//   return new Token(tokenA.chainId, Pair.getAddress(tokenA, tokenB), 18, 'UNI-V2', 'Uniswap V2')
+// }

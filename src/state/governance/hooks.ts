@@ -1,6 +1,7 @@
 import { updateLastSelectedProtocolID } from './../user/actions'
 import { TransactionResponse } from '@ethersproject/providers'
-import { TokenAmount, Token, Percent } from '@uniswap/sdk'
+import { Token, CurrencyAmount } from '@uniswap/sdk-core'
+import { TokenAmount, ChainId, Percent } from '@uniswap/sdk'
 import {
   updateActiveProtocol,
   updateFilterActive,
@@ -13,7 +14,7 @@ import { AppDispatch, AppState } from './../index'
 import { useDispatch, useSelector } from 'react-redux'
 import { GovernanceInfo, GlobaData, COMPOUND_GOVERNANCE } from './reducer'
 import { useState, useEffect, useCallback } from 'react'
-import { useGovernanceContract, useGovTokenContract, useIsAave } from '../../hooks/useContract'
+import { useGovernanceContract, useGovTokenContract, useIsAave, useGovernanceContractBravo } from '../../hooks/useContract'
 import { useSingleCallResult } from '../multicall/hooks'
 import { useActiveWeb3React } from '../../hooks'
 import { useTransactionAdder } from '../transactions/hooks'
@@ -75,7 +76,7 @@ export function useFilterActive(): [boolean, (filterActive: boolean) => void] {
   return [filterActive, setFilterActive]
 }
 
-export function useGovernanceToken(): Token | undefined {
+export function useGovernanceToken(): any | undefined {
   const { chainId } = useActiveWeb3React()
   const [activeProtocol] = useActiveProtocol()
   return chainId && activeProtocol ? deserializeToken(activeProtocol.token) : undefined
@@ -353,7 +354,7 @@ export function useVoteCallback(): {
 } {
   const { account } = useActiveWeb3React()
 
-  const govContract = useGovernanceContract()
+  const govContract = useGovernanceContractBravo()
   const addTransaction = useTransactionAdder()
   const isAaveGov = useIsAave()
 
@@ -566,4 +567,90 @@ export function useDelegateInfo(address: string | undefined): DelegateInfo | und
   }, [address, client, data, isEOA, library])
 
   return data
+}
+
+export interface CreateProposalData {
+  targets: string[]
+  values: string[]
+  signatures: string[]
+  calldatas: string[]
+  description: string
+}
+
+export function useCreateProposalCallback(): (
+  createProposalData: CreateProposalData | undefined
+) => undefined | Promise<string> {
+  const { account } = useActiveWeb3React()
+
+  const latestGovernanceContract = useGovTokenContract()
+  const addTransaction = useTransactionAdder()
+
+  return useCallback(
+    (createProposalData: CreateProposalData | undefined) => {
+      if (!account || !latestGovernanceContract || !createProposalData) return undefined
+
+      const args = [
+        createProposalData.targets,
+        createProposalData.values,
+        createProposalData.signatures,
+        createProposalData.calldatas,
+        createProposalData.description,
+      ]
+
+      return latestGovernanceContract.estimateGas.propose(...args).then((estimatedGasLimit) => {
+        return latestGovernanceContract
+          .propose(...args, { gasLimit: calculateGasMargin(estimatedGasLimit) })
+          .then((response: TransactionResponse) => {
+            addTransaction(response, {
+              summary: `Submitted new proposal`,
+            })
+            return response.hash
+          })
+      })
+    },
+    [account, addTransaction, latestGovernanceContract]
+  )
+}
+
+export const UNI: { [chainId: number]: Token } = {
+  [ChainId.MAINNET]: new Token(ChainId.MAINNET, '0xc00e94cb662c3520282e6f5717214004a7f26888', 18, 'COMP', 'Compound Governance Token'),
+  [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, '0x8c8D1d31391BD317a2cAff9A7bD2BeA8A2f5B34d', 18, 'COMP', 'Compound Governance Token'),
+  // [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, UNI_ADDRESS[3], 18, 'UNI', 'Uniswap'),
+  // [ChainId.GOERLI]: new Token(ChainId.GOERLI, UNI_ADDRESS[5], 18, 'UNI', 'Uniswap'),
+  // [ChainId.KOVAN]: new Token(ChainId.KOVAN, UNI_ADDRESS[42], 18, 'UNI', 'Uniswap'),
+}
+
+export function useProposalThreshold(): CurrencyAmount<Token> | undefined {
+  const { chainId } = useActiveWeb3React()
+
+  const latestGovernanceContract = useGovernanceContractBravo()
+  const res = useSingleCallResult(latestGovernanceContract, 'proposalThreshold')
+  const uni = chainId ? UNI[chainId] : undefined
+
+  if (res?.result?.[0] && uni) {
+    // TODO: check thresold here
+    // return CurrencyAmount.fromRawAmount(uni, res.result[0])
+    return res.result[0];
+  }
+
+  return undefined
+}
+
+export function useLatestProposalId(address: string | undefined): string | undefined {
+  const govContractV1 = useGovernanceContractBravo()
+  const res = useSingleCallResult(govContractV1, 'latestProposalIds', [address])
+
+  return res?.result?.[0]?.toString()
+}
+
+export enum ProposalState {
+  UNDETERMINED = -1,
+  PENDING,
+  ACTIVE,
+  CANCELED,
+  DEFEATED,
+  SUCCEEDED,
+  QUEUED,
+  EXPIRED,
+  EXECUTED,
 }

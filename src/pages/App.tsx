@@ -11,6 +11,7 @@ import { RedirectWithUpdatedGovernance } from './Governance/redirect'
 import SideMenu from '../components/Menu/SideMenu'
 import TwitterAccountQueryParamReader from '../state/social/TwitterAccountQueryParamReader'
 import Web3Status from '../components/Web3Status'
+import CreateProposal from './CreateProposal/index'
 import Delegates from './Delegates'
 import Proposals from './Proposals'
 import ProposalDetails from '../components/governance/ProposalDetails'
@@ -79,6 +80,7 @@ export default function App() {
           <TopLevelModals />
           <Web3ReactManager>
             <Switch>
+              <Route exact strict path="/create-proposal" component={CreateProposal} />
               <Route exact strict path="/delegates/:protocolID" component={Delegates} />
               <Route exact strict path="/proposals/:protocolID" component={Proposals} />
               <Route exact strict path="/proposals/:protocolID/:proposalID" component={ProposalDetails} />

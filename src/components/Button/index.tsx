@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { darken } from 'polished'
 import { Button as RebassButton, ButtonProps } from 'rebass/styled-components'
+import { ChevronDown } from 'react-feather'
+import { RowBetween } from '../Row'
 
 const Base = styled(RebassButton)<{
   padding?: string
@@ -236,4 +238,15 @@ export function ButtonError({ error, ...rest }: { error?: boolean } & ButtonProp
   } else {
     return <ButtonPrimary {...rest} />
   }
+}
+
+export function ButtonDropdown({ disabled = false, children, ...rest }: { disabled?: boolean } & ButtonProps) {
+  return (
+    <ButtonPrimary {...rest} disabled={disabled}>
+      <RowBetween>
+        <div style={{ display: 'flex', alignItems: 'center' }}>{children}</div>
+        <ChevronDown size={24} />
+      </RowBetween>
+    </ButtonPrimary>
+  )
 }

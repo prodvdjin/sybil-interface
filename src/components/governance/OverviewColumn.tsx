@@ -43,11 +43,20 @@ export default function OverviewColumn() {
         <TabOption
           as={Link}
           to={'/proposals/' + activeProtocol?.id}
-          selected={location.pathname.includes('proposals')}
+          selected={location.pathname.includes('proposals') && !location.pathname.includes('create')}
           color={activeProtocol?.primaryColor}
           color2={activeProtocol?.secondaryColor}
         >
           View Proposals
+        </TabOption>
+        <TabOption
+          as={Link}
+          to={'/create-proposal'}
+          selected={location.pathname.includes('create-proposal')}
+          color={activeProtocol?.primaryColor}
+          color2={activeProtocol?.secondaryColor}
+        >
+          Create Proposal
         </TabOption>
       </AutoColumn>
     </Wrapper>

@@ -118,6 +118,7 @@
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "@uniswap/sdk-core": "^3.0.0",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.14",

@@ -1,6 +1,7 @@
 import { DelegateData } from './hooks'
 import { SerializedToken } from './../user/actions'
-import { ChainId, Token } from '@uniswap/sdk'
+import { ChainId } from '@uniswap/sdk'
+import { Token } from '@uniswap/sdk-core'
 import {
   updateActiveProtocol,
   updateFilterActive,

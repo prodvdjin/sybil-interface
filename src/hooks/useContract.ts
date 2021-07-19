@@ -136,3 +136,9 @@ export function useGovTokenContract(): Contract | null {
 export function useAutonomousContract(tokenAddress?: string): Contract | null {
   return useContract(tokenAddress ?? undefined, AUTONOMOUS_ABI, true)
 }
+
+// export function useGovernanceV1Contract(): Contract | null {
+//   return useContract(GOVERNANCE_ALPHA_V1_ADDRESSES, GOVERNANCE_ABI, true)
+// }
+
+// export const useLatestGovernanceContract = useGovernanceV1Contract

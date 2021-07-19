@@ -82,7 +82,7 @@ export function useTokenBalancesWithLoadingIndicator(
 export function useTokenBalances(
   address?: string,
   tokens?: (Token | undefined)[]
-): { [tokenAddress: string]: TokenAmount | undefined } {
+): { [tokenAddress: string]: any | undefined } {
   return useTokenBalancesWithLoadingIndicator(address, tokens)[0]
 }
 

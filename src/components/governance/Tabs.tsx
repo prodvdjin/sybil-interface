@@ -56,12 +56,23 @@ function Tabs() {
           <TabOption
             as={Link}
             to={'/proposals/' + activeProtocol?.id}
-            selected={location.pathname.includes('proposals')}
+            selected={location.pathname.includes('proposals') && !location.pathname.includes('create-proposal')}
             color={activeProtocol?.primaryColor}
             color2={activeProtocol?.secondaryColor}
           >
             <TYPE.black fontSize={'16px'} color={activeProtocol?.primaryColor}>
               Proposals
+            </TYPE.black>
+          </TabOption>
+          <TabOption
+            as={Link}
+            to={'/create-proposal/'}
+            selected={location.pathname.includes('create-proposal')}
+            color={activeProtocol?.primaryColor}
+            color2={activeProtocol?.secondaryColor}
+          >
+            <TYPE.black fontSize={'16px'} color={activeProtocol?.primaryColor}>
+              Create Proposal
             </TYPE.black>
           </TabOption>
         </AutoRow>

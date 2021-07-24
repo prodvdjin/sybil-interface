@@ -127,7 +127,7 @@ export const ResizingTextArea = memo(
 
     return (
       <TextAreaInput
-        style={{ height: 'auto', minHeight: '500px' }}
+        style={{ height: 'auto', minHeight: '240px' }}
         className={className}
         autoComplete="off"
         autoCorrect="off"

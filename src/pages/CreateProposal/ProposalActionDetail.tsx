@@ -63,8 +63,7 @@ export const ProposalActionDetail = ({
     <ProposalActionDetailContainer className={className}>
       {proposalActionsData[proposalAction].map((field, i) =>
         field.type === ProposalActionDetailField.ADDRESS ? (
-          <AddressInputPanel key={i} value={toAddress} onChange={onToAddressInput} />
-          // <AddressInputPanel key={i} label={field.label} value={toAddress} onChange={onToAddressInput} />
+          <AddressInputPanel key={i} label={field.label} value={toAddress} onChange={onToAddressInput} />
         ) : field.type === ProposalActionDetailField.CURRENCY ? (
           // <CurrencyInputPanel
           //   key={i}

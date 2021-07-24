@@ -11,7 +11,7 @@ import { Currency, CurrencyAmount, Token } from '@uniswap/sdk-core'
 // import { CreateProposalTabs } from '../../components/NavigationTabs'
 import { ButtonError } from 'components/Button'
 import { AutoColumn } from 'components/Column'
-import { BlueCard } from 'components/Card'
+import { PinkCard, BlueCard } from 'components/Card'
 // import { Wrapper } from 'pages/Pool/styleds'
 import { ProposalAction, ProposalActionSelector, ProposalActionSelectorModal } from './ProposalActionSelector'
 import { ProposalEditor } from './ProposalEditor'
@@ -245,21 +245,15 @@ ${bodyValue}
     //   <CreateProposalTabs />
     <div>
       <CreateProposalWrapper>
-        <BlueCard>
+        <PinkCard>
           <AutoColumn gap="10px">
             <TYPE.link fontWeight={400} color={'primaryText1'}>
-              <Trans>
                 <strong>Tip:</strong> Select an action and describe your proposal for the community. The proposal cannot
                 be modified after submission, so please verify all information before submitting. The voting period will
-                begin immediately and last for 7 days. To propose a custom action,{' '}
-                <ExternalLink href="https://uniswap.org/docs/v2/governance/governance-reference/#propose">
-                  read the docs
-                </ExternalLink>
-                .
-              </Trans>
+                begin immediately and last for 7 days.
             </TYPE.link>
           </AutoColumn>
-        </BlueCard>
+        </PinkCard>
 
         <ProposalActionSelector onClick={handleActionSelectorClick} proposalAction={proposalAction} />
         <ProposalActionDetail

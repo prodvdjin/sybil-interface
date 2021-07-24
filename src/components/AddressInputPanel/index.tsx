@@ -68,11 +68,13 @@ const Input = styled.input<{ error?: boolean }>`
 export default function AddressInputPanel({
   id,
   value,
+  label,
   onChange
 }: {
   id?: string
   // the typed string value
   value: string
+  label?: string,
   // triggers whenever the typed value changes
   onChange: (value: string) => void
 }): JSX.Element {
@@ -99,7 +101,7 @@ export default function AddressInputPanel({
           <AutoColumn gap="md">
             <RowBetween>
               <TYPE.black color={theme.text2} fontWeight={500} fontSize={14}>
-                Delegate Address
+                {label ?? 'Delegate Address'}
               </TYPE.black>
               {address && chainId && (
                 <ExternalLink href={getEtherscanLink(chainId, name ?? address, 'address')} style={{ fontSize: '14px' }}>

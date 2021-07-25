@@ -66,7 +66,7 @@ function Tabs() {
           </TabOption>
           <TabOption
             as={Link}
-            to={'/create-proposal/'}
+            to={'/create-proposal'}
             selected={location.pathname.includes('create-proposal')}
             color={activeProtocol?.primaryColor}
             color2={activeProtocol?.secondaryColor}

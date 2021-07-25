@@ -19,7 +19,7 @@ import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
 import { getContract } from '../utils'
 import { useActiveWeb3React } from './index'
 import { useActiveProtocol, useGovernanceToken } from '../state/governance/hooks'
-import { AAVE_GOVERNANCE } from '../state/governance/reducer'
+import { AAVE_GOVERNANCE, COMP_GOVERNANCE_ADDRESS_BRAVO } from '../state/governance/reducer'
 
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
@@ -137,8 +137,8 @@ export function useAutonomousContract(tokenAddress?: string): Contract | null {
   return useContract(tokenAddress ?? undefined, AUTONOMOUS_ABI, true)
 }
 
-// export function useGovernanceV1Contract(): Contract | null {
-//   return useContract(GOVERNANCE_ALPHA_V1_ADDRESSES, GOVERNANCE_ABI, true)
-// }
+export function useGovernanceV1Contract(): Contract | null {
+  return useContract(COMP_GOVERNANCE_ADDRESS_BRAVO, GOVERNANCE_ABI, true)
+}
 
-// export const useLatestGovernanceContract = useGovernanceV1Contract
+export const useLatestGovernanceContract = useGovernanceV1Contract

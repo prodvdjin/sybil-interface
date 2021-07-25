@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { updateLastSelectedProtocolID } from './../user/actions'
 import { TransactionResponse } from '@ethersproject/providers'
 import { Token, CurrencyAmount } from '@uniswap/sdk-core'
@@ -14,7 +15,7 @@ import { AppDispatch, AppState } from './../index'
 import { useDispatch, useSelector } from 'react-redux'
 import { GovernanceInfo, GlobaData, COMPOUND_GOVERNANCE } from './reducer'
 import { useState, useEffect, useCallback } from 'react'
-import { useGovernanceContract, useGovTokenContract, useIsAave, useGovernanceContractBravo } from '../../hooks/useContract'
+import { useGovernanceContract, useGovTokenContract, useIsAave, useGovernanceContractBravo, useLatestGovernanceContract } from '../../hooks/useContract'
 import { useSingleCallResult } from '../multicall/hooks'
 import { useActiveWeb3React } from '../../hooks'
 import { useTransactionAdder } from '../transactions/hooks'
@@ -295,15 +296,27 @@ export function useUserVotes(): TokenAmount | undefined {
   const govTokenContract = useGovTokenContract()
 
   const govToken = useGovernanceToken()
-  const isAaave = useIsAave()
+  const isAave = useIsAave()
 
   // check for available votes
   const votes = useSingleCallResult(
     govTokenContract,
-    isAaave ? 'getPowerCurrent' : 'getCurrentVotes',
-    isAaave ? [account ?? undefined, 0] : [account ?? undefined]
+    isAave ? 'getPowerCurrent' : 'getCurrentVotes',
+    isAave ? [account ?? undefined, 0] : [account ?? undefined]
   )?.result?.[0]
   return votes && govToken ? new TokenAmount(govToken, votes) : undefined
+}
+
+export function useUserVotes2(): { loading: boolean; votes: CurrencyAmount<Token> | undefined } {
+  const { account, chainId } = useActiveWeb3React()
+  const govTokenContract = useGovTokenContract()
+
+  // check for available votes
+  const { result, loading } = useSingleCallResult(govTokenContract, 'getCurrentVotes', [account ?? undefined])
+  return useMemo(() => {
+    const uni = chainId ? ECR[chainId] : undefined
+    return { loading, votes: uni && result ? CurrencyAmount.fromRawAmount(uni, result?.[0]) : undefined }
+  }, [chainId, loading, result])
 }
 
 // fetch available votes as of block (usually proposal start block)
@@ -612,7 +625,7 @@ export function useCreateProposalCallback(): (
   )
 }
 
-export const UNI: { [chainId: number]: Token } = {
+export const ECR: { [chainId: number]: Token } = {
   // TODO: check contract later
   [ChainId.MAINNET]: new Token(ChainId.MAINNET, '0xc00e94cb662c3520282e6f5717214004a7f26888', 18, 'ECR', 'ECR Governance Token'),
   [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, '0x8c8D1d31391BD317a2cAff9A7bD2BeA8A2f5B34d', 18, 'ECR', 'ECR Governance Token'),
@@ -624,16 +637,16 @@ export const UNI: { [chainId: number]: Token } = {
 export function useProposalThreshold(): CurrencyAmount<Token> | undefined {
   const { chainId } = useActiveWeb3React()
 
-  const latestGovernanceContract = useGovernanceContractBravo()
+  const latestGovernanceContract = useLatestGovernanceContract()
 
   const res = useSingleCallResult(latestGovernanceContract, 'proposalThreshold')
   console.log('latestGovernanceContract ==>', latestGovernanceContract, res);
-  const uni = chainId ? UNI[chainId] : undefined
+  console.log('latestGovernanceContract ==>', res?.result?.[0]);
+  const uni = chainId ? ECR[chainId] : undefined
 
   if (res?.result?.[0] && uni) {
     // TODO: check thresold here
-    // return CurrencyAmount.fromRawAmount(uni, res.result[0])
-    return res.result[0];
+    return CurrencyAmount.fromRawAmount(uni, res.result[0])
   }
 
   return undefined

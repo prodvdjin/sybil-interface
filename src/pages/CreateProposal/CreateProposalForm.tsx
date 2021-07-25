@@ -26,20 +26,18 @@ import {
   useProposalData,
   useProposalThreshold,
   useUserVotes,
+  useUserVotes2,
 } from 'state/governance/hooks'
-// import { Trans } from '@lingui/macro'
 import { tryParseAmount } from 'state/swap/hooks'
 import { getAddress } from '@ethersproject/address'
 
-export const UNI: { [chainId: number]: Token } = {
+export const ECR: { [chainId: number]: Token } = {
   [ChainId.MAINNET]: new Token(ChainId.MAINNET, '0xc00e94cb662c3520282e6f5717214004a7f26888', 18, 'ECR', 'ECR Governance Token'),
   [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, '0x8c8D1d31391BD317a2cAff9A7bD2BeA8A2f5B34d', 18, 'ECR', 'ECR Governance Token'),
   // [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, UNI_ADDRESS[3], 18, 'UNI', 'Uniswap'),
   // [ChainId.GOERLI]: new Token(ChainId.GOERLI, UNI_ADDRESS[5], 18, 'UNI', 'Uniswap'),
   // [ChainId.KOVAN]: new Token(ChainId.KOVAN, UNI_ADDRESS[42], 18, 'UNI', 'Uniswap'),
 }
-
-const Trans = styled.div``;
 
 const CreateProposalButton = ({
   proposalThreshold,
@@ -70,17 +68,17 @@ const CreateProposalButton = ({
       onClick={handleCreateProposal}
     >
       {hasActiveOrPendingProposal ? (
-        <Trans>You already have an active or pending proposal</Trans>
+        <>You already have an active or pending proposal</>
       ) : !hasEnoughVote ? (
         <>
           {formattedProposalThreshold ? (
-            <Trans>You must have {formattedProposalThreshold} votes to submit a proposal</Trans>
+            <>You must have {formattedProposalThreshold} votes to submit a proposal</>
           ) : (
-            <Trans>You don&apos;t have enough votes to submit a proposal</Trans>
+            <>You don&apos;t have enough votes to submit a proposal</>
           )}
         </>
       ) : (
-        <Trans>Create Proposal</Trans>
+        <>Create Proposal</>
       )}
     </ButtonError>
   )
@@ -103,8 +101,8 @@ export default function CreateProposal() {
   const latestProposalId = useLatestProposalId(account ?? undefined) ?? '0'
   const latestProposalData = useProposalData(latestProposalId)
   // TODO:
-  // const { votes: availableVotes } = useUserVotes()
-  const availableVotes = useUserVotes()
+  const { votes: availableVotes } = useUserVotes2()
+  // const availableVotes = useUserVotes2()
   const proposalThreshold: CurrencyAmount<Token> | undefined = useProposalThreshold()
 
   const [modalOpen, setModalOpen] = useState(false)
@@ -112,7 +110,7 @@ export default function CreateProposal() {
   const [attempting, setAttempting] = useState(false)
   const [proposalAction, setProposalAction] = useState(ProposalAction.TRANSFER_TOKEN)
   const [toAddressValue, setToAddressValue] = useState('')
-  const [currencyValue, setCurrencyValue] = useState<Currency>(UNI[chainId ?? 1])
+  const [currencyValue, setCurrencyValue] = useState<Currency>(ECR[chainId ?? 1])
   const [amountValue, setAmountValue] = useState('')
   const [titleValue, setTitleValue] = useState('')
   const [bodyValue, setBodyValue] = useState('')
@@ -177,7 +175,7 @@ export default function CreateProposal() {
       Boolean(
         !proposalAction ||
           !utils.isAddress(toAddressValue) ||
-          // !currencyValue?.isToken || // TODO: check tmr
+          !currencyValue?.isToken || // TODO: check tmr
           amountValue === '' ||
           titleValue === '' ||
           bodyValue === ''

@@ -595,7 +595,7 @@ export function useCreateProposalCallback(): (
 ) => undefined | Promise<string> {
   const { account } = useActiveWeb3React()
 
-  const latestGovernanceContract = useGovTokenContract()
+  const latestGovernanceContract = useLatestGovernanceContract()
   const addTransaction = useTransactionAdder()
 
   return useCallback(
@@ -640,12 +640,9 @@ export function useProposalThreshold(): CurrencyAmount<Token> | undefined {
   const latestGovernanceContract = useLatestGovernanceContract()
 
   const res = useSingleCallResult(latestGovernanceContract, 'proposalThreshold')
-  console.log('latestGovernanceContract ==>', latestGovernanceContract, res);
-  console.log('latestGovernanceContract ==>', res?.result?.[0]);
   const uni = chainId ? ECR[chainId] : undefined
 
   if (res?.result?.[0] && uni) {
-    // TODO: check thresold here
     return CurrencyAmount.fromRawAmount(uni, res.result[0])
   }
 

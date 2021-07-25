@@ -187,10 +187,6 @@ export default function CreateProposal() {
     availableVotes && proposalThreshold && JSBI.greaterThanOrEqual(availableVotes.quotient, proposalThreshold.quotient)
   )
 
-  console.log('availableVotes ==>', availableVotes?.quotient);
-  console.log('proposalThreshold ==>', proposalThreshold?.quotient);
-  console.log('hasEnoughVote ==>', hasEnoughVote);
-
   const createProposalCallback = useCreateProposalCallback()
 
   const handleCreateProposal = async () => {
@@ -198,14 +194,12 @@ export default function CreateProposal() {
 
     const createProposalData: CreateProposalData = {} as CreateProposalData
 
-    // if (!createProposalCallback || !proposalAction || !currencyValue.isToken) return // TODO: check tmr
-    if (!createProposalCallback || !proposalAction) return
+    if (!createProposalCallback || !proposalAction || !currencyValue.isToken) return
 
     const tokenAmount = tryParseAmount(amountValue, currencyValue)
     if (!tokenAmount) return
 
-    // createProposalData.targets = [currencyValue.address] // TODO: check tmr
-    createProposalData.targets = [currencyValue.toString()]
+    createProposalData.targets = [currencyValue.address]
     createProposalData.values = ['0']
     createProposalData.description = `# ${titleValue}
 
@@ -234,6 +228,8 @@ ${bodyValue}
     for (let i = 0; i < createProposalData.signatures.length; i++) {
       createProposalData.calldatas[i] = utils.defaultAbiCoder.encode(types[i], values[i])
     }
+
+    console.log('createProposalData ==>', currencyValue.address, createProposalData);
 
     const hash = await createProposalCallback(createProposalData ?? undefined)?.catch(() => {
       setAttempting(false)
@@ -288,8 +284,7 @@ ${bodyValue}
         />
         {!hasEnoughVote ? (
           <AutonomousProposalCTA>
-            Don’t have 2.5M votes? Anyone can create an autonomous proposal using{' '}
-            <ExternalLink href="https://fish.vote">fish.vote</ExternalLink>
+            Don’t have 1M votes?
           </AutonomousProposalCTA>
         ) : null}
       </CreateProposalWrapper>

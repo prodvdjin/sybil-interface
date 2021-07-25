@@ -89,7 +89,7 @@ export default function ProposalList({ allProposals }: { allProposals: { [id: st
                   return null
                 }
 
-                const status = allStatuses[i] ? enumerateProposalState(allStatuses[i]) : enumerateProposalState(0)
+                const status = allStatuses?.[i] ? enumerateProposalState(allStatuses[i]) : enumerateProposalState(0)
 
                 return (
                   <>

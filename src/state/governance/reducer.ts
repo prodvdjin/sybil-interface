@@ -74,7 +74,7 @@ export const COMPOUND_GOVERNANCE: GovernanceInfo = {
   primaryColor: '#e7bd60',
   secondaryColor: '#fbefd4',
   token: serializeToken(COMP),
-  governanceAlphaAddresses: [COMP_GOVERNANCE_ADDRESS],
+  governanceAlphaAddresses: [COMP_GOVERNANCE_ADDRESS, COMP_GOVERNANCE_ADDRESS_BRAVO],
   governanceAddressBravo: COMP_GOVERNANCE_ADDRESS_BRAVO,
   migrationProposalId: 42,
   social: '@compoundfinance',

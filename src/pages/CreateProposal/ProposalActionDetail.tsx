@@ -1,6 +1,6 @@
 import React from 'react'
 import AddressInputPanel from 'components/AddressInputPanel'
-// import CurrencyInputPanel from 'components/CurrencyInputPanel'
+import CurrencyInputPanel from 'components/CurrencyInputPanel'
 import styled from 'styled-components'
 import { ProposalAction } from './ProposalActionSelector'
 // import { Currency } from '@uniswap/sdk'
@@ -65,21 +65,21 @@ export const ProposalActionDetail = ({
         field.type === ProposalActionDetailField.ADDRESS ? (
           <AddressInputPanel key={i} label={field.label} value={toAddress} onChange={onToAddressInput} />
         ) : field.type === ProposalActionDetailField.CURRENCY ? (
-          // <CurrencyInputPanel
-          //   key={i}
-          //   value={amount}
-          //   currency={currency}
-          //   onUserInput={(amount: string) => onAmountInput(amount)}
-          //   onCurrencySelect={(currency: Currency) => onCurrencySelect(currency)}
-          //   showMaxButton={false}
-          //   showCommonBases={false}
-          //   showCurrencyAmount={false}
-          //   disableNonToken={true}
-          //   hideBalance={true}
-          //   id="currency-input"
-          // />
+          <CurrencyInputPanel
+            key={i}
+            value={amount}
+            currency={currency}
+            onUserInput={(amount: string) => onAmountInput(amount)}
+            onCurrencySelect={(currency: Currency) => onCurrencySelect(currency)}
+            showMaxButton={false}
+            showCommonBases={false}
+            showCurrencyAmount={false}
+            disableNonToken={true}
+            hideBalance={true}
+            id="currency-input"
+          />
           // TODO:
-          <>CurrencyInputPanel</>
+          // <>CurrencyInputPanel</>
         ) : null
       )}
     </ProposalActionDetailContainer>

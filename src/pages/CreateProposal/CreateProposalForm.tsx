@@ -32,8 +32,8 @@ import { tryParseAmount } from 'state/swap/hooks'
 import { getAddress } from '@ethersproject/address'
 
 export const UNI: { [chainId: number]: Token } = {
-  [ChainId.MAINNET]: new Token(ChainId.MAINNET, '0xc00e94cb662c3520282e6f5717214004a7f26888', 18, 'COMP', 'Compound Governance Token'),
-  [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, '0x8c8D1d31391BD317a2cAff9A7bD2BeA8A2f5B34d', 18, 'COMP', 'Compound Governance Token'),
+  [ChainId.MAINNET]: new Token(ChainId.MAINNET, '0xc00e94cb662c3520282e6f5717214004a7f26888', 18, 'ECR', 'ECR Governance Token'),
+  [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, '0x8c8D1d31391BD317a2cAff9A7bD2BeA8A2f5B34d', 18, 'ECR', 'ECR Governance Token'),
   // [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, UNI_ADDRESS[3], 18, 'UNI', 'Uniswap'),
   // [ChainId.GOERLI]: new Token(ChainId.GOERLI, UNI_ADDRESS[5], 18, 'UNI', 'Uniswap'),
   // [ChainId.KOVAN]: new Token(ChainId.KOVAN, UNI_ADDRESS[42], 18, 'UNI', 'Uniswap'),
@@ -188,6 +188,10 @@ export default function CreateProposal() {
   const hasEnoughVote = Boolean(
     availableVotes && proposalThreshold && JSBI.greaterThanOrEqual(availableVotes.quotient, proposalThreshold.quotient)
   )
+
+  console.log('availableVotes ==>', availableVotes?.quotient);
+  console.log('proposalThreshold ==>', proposalThreshold?.quotient);
+  console.log('hasEnoughVote ==>', hasEnoughVote);
 
   const createProposalCallback = useCreateProposalCallback()
 

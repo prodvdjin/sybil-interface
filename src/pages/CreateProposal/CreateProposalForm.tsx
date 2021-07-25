@@ -24,6 +24,7 @@ import {
   useCreateProposalCallback,
   useLatestProposalId,
   useProposalData,
+  useProposalStatus,
   useProposalThreshold,
   useUserVotes,
   useUserVotes2,
@@ -100,6 +101,7 @@ export default function CreateProposal() {
 
   const latestProposalId = useLatestProposalId(account ?? undefined) ?? '0'
   const latestProposalData = useProposalData(latestProposalId)
+  const status = useProposalStatus(latestProposalId)
   // TODO:
   const { votes: availableVotes } = useUserVotes2()
   // const availableVotes = useUserVotes2()
@@ -271,11 +273,8 @@ ${bodyValue}
         />
         <CreateProposalButton
           proposalThreshold={proposalThreshold}
-          // hasActiveOrPendingProposal={
-          //   latestProposalData?.status === ProposalState.ACTIVE || latestProposalData?.status === ProposalState.PENDING
-          // }
           hasActiveOrPendingProposal={
-            false
+            status === 'active' || status === 'pending'
             // latestProposalData?.status === ProposalState.ACTIVE || latestProposalData?.status === ProposalState.PENDING
           }
           hasEnoughVote={hasEnoughVote}

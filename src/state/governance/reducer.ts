@@ -66,7 +66,7 @@ export const COMP_ADDRESS = '0x8c8D1d31391BD317a2cAff9A7bD2BeA8A2f5B34d'
 // export const COMP_GOVERNANCE_ADDRESS_BRAVO = '0xc0da02939e1441f497fd74f78ce7decb17b66529'
 // export const COMP_GOVERNANCE_ADDRESS = '0xc0dA01a04C3f3E0be433606045bB7017A7323E38'
 // export const COMP_ADDRESS = '0xc00e94cb662c3520282e6f5717214004a7f26888'
-const COMP = new Token(ChainId.MAINNET, COMP_ADDRESS, 18, 'COMP', 'Compound Governance Token')
+const COMP = new Token(ChainId.MAINNET, COMP_ADDRESS, 18, 'ECR', 'ECR Governance Token')
 export const COMPOUND_GOVERNANCE: GovernanceInfo = {
   id: 'compound',
   name: 'ECR Governance',

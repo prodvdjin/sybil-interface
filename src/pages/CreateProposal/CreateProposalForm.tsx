@@ -250,7 +250,7 @@ ${bodyValue}
             <TYPE.link fontWeight={400} color={'primaryText1'}>
                 <strong>Tip:</strong> Select an action and describe your proposal for the community. The proposal cannot
                 be modified after submission, so please verify all information before submitting. The voting period will
-                begin immediately and last for 7 days.
+                begin immediately and last for 3 days.
             </TYPE.link>
           </AutoColumn>
         </PinkCard>
@@ -283,7 +283,7 @@ ${bodyValue}
         />
         {!hasEnoughVote ? (
           <AutonomousProposalCTA>
-            Don’t have 1M votes?
+            Don’t have 100k votes?
           </AutonomousProposalCTA>
         ) : null}
       </CreateProposalWrapper>

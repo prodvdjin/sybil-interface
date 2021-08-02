@@ -164,11 +164,12 @@ function ProposalDetails({
 
   const userAvailableVotes = useUserVotes()
   // only show voting if user has > 0 votes at proposal start block and proposal is active,
-  const showVotingButtons =
+  const showVotingButtons = 
     userAvailableVotes &&
-    userAvailableVotes.greaterThan(BIG_INT_ZERO) &&
+    userAvailableVotes?.greaterThan(BIG_INT_ZERO) && 
     proposalData &&
-    proposalData.status === 'active'
+    status === 'active'
+
 
   return (
     <BodyWrapper>

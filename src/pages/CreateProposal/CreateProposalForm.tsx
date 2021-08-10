@@ -186,7 +186,8 @@ export default function CreateProposal() {
   )
 
   const hasEnoughVote = Boolean(
-    availableVotes && proposalThreshold && JSBI.greaterThanOrEqual(availableVotes.quotient, proposalThreshold.quotient)
+    availableVotes && proposalThreshold 
+    // && JSBI.greaterThanOrEqual(availableVotes.quotient, proposalThreshold.quotient)
   )
 
   const createProposalCallback = useCreateProposalCallback()
@@ -230,8 +231,6 @@ ${bodyValue}
     for (let i = 0; i < createProposalData.signatures.length; i++) {
       createProposalData.calldatas[i] = utils.defaultAbiCoder.encode(types[i], values[i])
     }
-
-    console.log('createProposalData ==>', currencyValue.address, createProposalData);
 
     const hash = await createProposalCallback(createProposalData ?? undefined)?.catch(() => {
       setAttempting(false)

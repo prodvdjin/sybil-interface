@@ -1,6 +1,6 @@
 {
-  "name": "@uniswap/interface",
-  "description": "Uniswap Interface",
+  "name": "@ecr/interface",
+  "description": "ECR Interface",
   "homepage": ".",
   "private": true,
   "devDependencies": {
@@ -99,9 +99,10 @@
     "integration-test": "start-server-and-test 'serve build -l 3000' http://localhost:3000 'cypress run'"
   },
   "eslintConfig": {
-    "extends": "react-app",
+    "extends": [],
     "ignorePatterns": [
-      "node_modules"
+      "node_modules",
+      "src"
     ]
   },
   "browserslist": {

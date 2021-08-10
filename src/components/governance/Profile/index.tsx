@@ -230,7 +230,7 @@ export default function Profile() {
         {!account ? (
           <Above1080Only>
             <TYPE.body fontWeight={500} fontSize="14px" color={activeProtocol?.primaryColor} mb="1rem">
-              Connect wallet to see voting power and link wallet address to Sybil identity.
+              Connect wallet to see voting power and link wallet address to this platform.
             </TYPE.body>
             {activeProtocol && (
               <ButtonCustom

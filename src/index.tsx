@@ -62,7 +62,7 @@ function Updaters() {
 }
 
 ReactDOM.render(
-  <StrictMode>
+  <>
     <FixedGlobalStyle />
     <Web3ReactProvider getLibrary={getLibrary}>
       <Web3ProviderNetwork getLibrary={getLibrary}>
@@ -77,6 +77,6 @@ ReactDOM.render(
         </Provider>
       </Web3ProviderNetwork>
     </Web3ReactProvider>
-  </StrictMode>,
+  </>,
   document.getElementById('root')
 )

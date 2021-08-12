@@ -117,7 +117,7 @@ export default function ProposalList({ allProposals }: { allProposals: { [id: st
                         </OnlyAboveSmall>
                       </RowBetween>
                     </ProposalItem>
-                    <Break />
+                    <Break key={`break-${i}`} />
                   </>
                 )
               })

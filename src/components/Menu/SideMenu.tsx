@@ -103,9 +103,9 @@ export default function SideMenu(): JSX.Element {
               <SybilWorkmark>ECR</SybilWorkmark>
             </RowFixed>
           </BlankInternalLink>
-          <ExternalLink href="https://github.com/Uniswap/sybil-list">
+          {/* <ExternalLink href="https://github.com/Uniswap/sybil-list">
             <GitHub size={20} style={{ stroke: 'black' }} />
-          </ExternalLink>
+          </ExternalLink> */}
         </RowBetween>
       </MobileHeader>
       <Wrapper open={open} onClick={() => !open && setOpen(!open)}>

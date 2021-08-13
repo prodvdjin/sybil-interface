@@ -14,7 +14,7 @@ import Dropdown from '../components/governance/Dropdown'
 
 export default function CreateProposal() {
   // if valid protocol id passed in, update global active protocol
-  useProtocolUpdate('compound')
+  useProtocolUpdate('ecr')
 
   const [activeProtocol] = useActiveProtocol()
 

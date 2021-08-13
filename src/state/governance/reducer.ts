@@ -68,7 +68,7 @@ export const COMP_ADDRESS = '0x62De7d65739d2ac81C12CC30BBB1223c88753C23'
 // export const COMP_ADDRESS = '0xc00e94cb662c3520282e6f5717214004a7f26888'
 const COMP = new Token(ChainId.MAINNET, COMP_ADDRESS, 18, 'ECR', 'ECR Governance Token')
 export const COMPOUND_GOVERNANCE: GovernanceInfo = {
-  id: 'compound',
+  id: 'ecr',
   name: 'ECR Governance',
   logo: CompLogo,
   primaryColor: '#e7bd60',
@@ -129,7 +129,7 @@ export const RADICLE_GOVERNANCE: GovernanceInfo = {
 // mapping for routing
 export const SUPPORTED_PROTOCOLS: { [id: string]: GovernanceInfo } = {
   // uniswap: UNISWAP_GOVERNANCE,
-  compound: COMPOUND_GOVERNANCE
+  ecr: COMPOUND_GOVERNANCE
   // aave: AAVE_GOVERNANCE,
   // pool: POOL_TOGETHER_GOVERNANCE,
   // radicle: RADICLE_GOVERNANCE

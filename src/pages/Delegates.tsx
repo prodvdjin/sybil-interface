@@ -49,7 +49,7 @@ export default function Delegates({
           </AutoColumn>
         </MediumHeaderWrapper>
         {/* TODO: fix later */}
-        {chainId === 4 ? (
+        {chainId === 1 ? (
           <DelegateList hideZero={false} />
         ) : (
           <OutlineCard>Please switch to Ethereum mainnet. </OutlineCard>

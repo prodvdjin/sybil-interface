@@ -627,7 +627,7 @@ export function useCreateProposalCallback(): (
 
 export const ECR: { [chainId: number]: Token } = {
   // TODO: check contract later
-  [ChainId.MAINNET]: new Token(ChainId.MAINNET, '0xc00e94cb662c3520282e6f5717214004a7f26888', 18, 'ECR', 'ECR Governance Token'),
+  [ChainId.MAINNET]: new Token(ChainId.MAINNET, '0x62De7d65739d2ac81C12CC30BBB1223c88753C23', 18, 'ECR', 'ECR Governance Token'),
   [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, '0x8c8D1d31391BD317a2cAff9A7bD2BeA8A2f5B34d', 18, 'ECR', 'ECR Governance Token'),
   // [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, UNI_ADDRESS[3], 18, 'UNI', 'Uniswap'),
   // [ChainId.GOERLI]: new Token(ChainId.GOERLI, UNI_ADDRESS[5], 18, 'UNI', 'Uniswap'),

@@ -42,7 +42,7 @@ export default function CreateProposal() {
           </AutoColumn>
         </MediumHeaderWrapper>
         {/* TODO: change later */}
-        {chainId === 4 ? <CreateProposalForm /> : <OutlineCard>Please switch to Ethereum mainnet.</OutlineCard>}
+        {chainId === 1 ? <CreateProposalForm /> : <OutlineCard>Please switch to Ethereum mainnet.</OutlineCard>}
       </AutoColumn>
     </BodyWrapper>
   )

@@ -59,10 +59,10 @@ export const UNISWAP_GOVERNANCE: GovernanceInfo = {
   emoji: '🦄'
 }
 
-// TODO: changed to rinkeby
-export const COMP_GOVERNANCE_ADDRESS_BRAVO = '0x16e68385487bFd1fb2DF7407B9DfB6944fEf440a'
-export const COMP_GOVERNANCE_ADDRESS = '0xD76d779be49fE24b1d8369E2ced9d112894CF869'
-export const COMP_ADDRESS = '0x8c8D1d31391BD317a2cAff9A7bD2BeA8A2f5B34d'
+// TODO: changed to mainnet
+export const COMP_GOVERNANCE_ADDRESS_BRAVO = '0xc0da02939e1441f497fd74f78ce7decb17b66529'
+export const COMP_GOVERNANCE_ADDRESS = '0x7095909b783f72969d3b2408e7b654ff1ab76247'
+export const COMP_ADDRESS = '0x62De7d65739d2ac81C12CC30BBB1223c88753C23'
 // export const COMP_GOVERNANCE_ADDRESS_BRAVO = '0xc0da02939e1441f497fd74f78ce7decb17b66529'
 // export const COMP_GOVERNANCE_ADDRESS = '0xc0dA01a04C3f3E0be433606045bB7017A7323E38'
 // export const COMP_ADDRESS = '0xc00e94cb662c3520282e6f5717214004a7f26888'
@@ -74,7 +74,7 @@ export const COMPOUND_GOVERNANCE: GovernanceInfo = {
   primaryColor: '#e7bd60',
   secondaryColor: '#fbefd4',
   token: serializeToken(COMP),
-  governanceAlphaAddresses: [COMP_GOVERNANCE_ADDRESS_BRAVO, COMP_GOVERNANCE_ADDRESS],
+  governanceAlphaAddresses: [COMP_GOVERNANCE_ADDRESS],
   governanceAddressBravo: COMP_GOVERNANCE_ADDRESS,
   migrationProposalId: 42,
   social: '@compoundfinance',

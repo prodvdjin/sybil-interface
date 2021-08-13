@@ -167,7 +167,7 @@ function DelegateInfo({
 
   // mainnet only
   // TODO: change later
-  if (chainId && chainId !== 4) {
+  if (chainId && chainId !== 1) {
     return (
       <BodyWrapper>
         <OutlineCard>Please switch to Ethereum mainnet. </OutlineCard>

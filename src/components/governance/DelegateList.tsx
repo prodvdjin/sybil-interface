@@ -268,7 +268,7 @@ export default function DelegateList({ hideZero }: { hideZero: boolean }) {
           </AutoRow>
           <NoWrap textAlign="end">{d.votes.length}</NoWrap>
           <NoWrap textAlign="end">
-            {globalData
+            {(globalData && globalData.delegatedVotesRaw !== '0') 
               ? new Percent(JSBI.BigInt(d.delegatedVotesRaw), JSBI.BigInt(globalData.delegatedVotesRaw)).toFixed(3) +
                 '%'
               : '-'}

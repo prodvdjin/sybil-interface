@@ -49,7 +49,7 @@ export default function Proposals({
           </AutoColumn>
         </MediumHeaderWrapper>
         {/* TODO: change later */}
-        {chainId === 4 ? (
+        {chainId === 1 ? (
           <ProposalList allProposals={topProposals} />
         ) : (
           <OutlineCard>Please switch to Ethereum mainnet. </OutlineCard>

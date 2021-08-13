@@ -1,5 +1,5 @@
 {
-  "name": "@ecr/interface",
+  "name": "@ecr-gov/interface",
   "description": "ECR Interface",
   "homepage": ".",
   "private": true,
